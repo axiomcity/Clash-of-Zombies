@@ -1,39 +1,39 @@
 -- Fichier data qui contient les libraires du jeu.
 
-player = {
+player          = {
     
-    vie = 100,
-    attaques = 2,
-    blessures = 0,
-    score = 0,
+    vie         = 100,
+    attaques    = 2,
+    blessures   = 0,
+    score       = 0,
     score_local = 0,
-    sobriquet = ""
+    sobriquet   = ""
 }
 
-ennemie = {
+ennemie         = {
   
-  vie = 10,
-  degat = 1,
-  sprite = love.graphics.newImage('assets/world/images/ennemie.png')
+  vie           = 10,
+  degat         = 1,
+  sprite        = love.graphics.newImage('assets/world/images/ennemie.png')
   
 }
 
-world = {
+world           = {
   
   -- le fond d'ecran et la musique
-  bg = "nil",
-  bgm = "nil",
-  cursor = love.graphics.newImage('assets/world/images/cursor.png'),
-  screen = "nil"
+  bg            = "nil",
+  bgm           = love.audio.newSource('assets/sounds/jicle.mp3', "stream"),
+  cursor        = love.graphics.newImage('assets/world/images/cursor.png'),
+  screen        = "nil"
 
 }
 
-parametres = {
+parametres      = {
   
-  music = 1,
-  sons = 1,
-  plein_ecran = false,
-  redim = true
+  music         = 1,
+  sons          = 1,
+  plein_ecran   = false,
+  redim         = true
 
 }
 

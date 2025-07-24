@@ -59,13 +59,13 @@ function ft_parametres()
   function love.keypressed(key)
   
   if key == 'up' then
-    music = music + 1
-    print("music :", music)
+    parametres.music = parametres.music + 1
+    print("music :", parametres.music)
   end
   
   if key == 'down' then
-    music = music - 1
-    print("music :", music)
+    parametres.music = parametres.music - 1
+    print("music :", parametres.music)
   end
   
   
@@ -86,7 +86,7 @@ function ft_parametres()
     ft_parametres()
   end
 
-  if key = 'escape' then
+  if key == 'escape' then
     ft_menu()
   end
   

@@ -74,6 +74,7 @@ end
 function ft_jicle()
   
   world.bg = love.graphics.newImage('assets/world/images/bg/bg_jicle.jpg')
+  love.audio.play(world.bgm)
   world.screen = "jicle"
   
   function love.draw()
