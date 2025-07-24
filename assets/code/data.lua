@@ -2,31 +2,38 @@
 
 player = {
     
+    vie = 100,
+    attaques = 2,
+    blessures = 0,
     score = 0,
-    character = 0,
-    username = "",
-    online_score = 0
+    score_local = 0,
+    sobriquet = ""
+}
 
+ennemie = {
+  
+  vie = 10,
+  degat = 1,
+  sprite = love.graphics.newImage('assets/world/images/ennemie.png')
+  
 }
 
 world = {
   
-  -- world images
-  video = love.graphics.newVideo('assets/sounds/opening.ogv'),
-  cursor = love.graphics.newImage('assets/world/images/cursor.png'),
-  bgm = "nil",
+  -- le fond d'ecran et la musique
   bg = "nil",
-  screen = "nil",
-  
-  -- world langues
-  language = "fr",
-  titles = "5",
-  txt_4 = "4",
-  txt_3 = "3",
-  txt_2 = "2",
-  
-  -- user settings
-  alphabet = {"a","b","c","d","e","f","g","h","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y",1,2,3,4,5,6,7,8,9,"-","_","@"}
-  
+  bgm = "nil",
+  cursor = love.graphics.newImage('assets/world/images/cursor.png'),
+  screen = "nil"
+
 }
+
+parametres = {
   
+  music = 1,
+  sons = 1,
+  plein_ecran = false,
+  redim = true
+
+}
+

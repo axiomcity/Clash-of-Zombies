@@ -1,0 +1,36 @@
+
+Liste des 5 elements qui constituent vraiment des prioritées absolues :
+
+- Programmer un systeme de points de vie du hero, et des ennemis.
+- Programmer Tous les ecrans : principal, pause, quitter, parametres, fin, jeu, gagné, perdu.
+- Programmer visuel des degats, vie du hero, des zombies.
+- Programmer parametres du son, des commandes, et affichage.
+- Programmer demo d'aide au jeu.
+
+
+
+Programmer 12 Niveaux de difficultés.
+Programmer un pathfinding.
+Programmer une fonctionnalité de mode multijoueur
+Programmer les animations des personnages, et de tout le reste.
+Programmer une super intro avec Luka.
+
+Programmer un easter egg
+Programmer des transition faisant penser un bocal.
+Programmer des liens vers mes reseaux sociaux, itch.io et d'autres lien utiles.
+Mettre des tectures sur chaque sprites.
+
+Programmer un systeme de musique.
+Programmer animations, de mort du boss, et phases du boss.
+Programmer les animation du hero, items, morts, combat, defense.
+Programmer items
+
+Programmer visuel du code source du jeu en mind map.
+Programmer changer le jeu en anglais, et autres langues du monde.
+Programmer Scoreboard
+Programmer jouable en ligne depuis nimprte quel plateforme, pc mobile, console.
+
+Programmer score enregistrable en ligne.
+Programmer jouable sur ecran tactile
+Programmer info sur les personnages. 
+
