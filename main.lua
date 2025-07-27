@@ -1,72 +1,76 @@
 -- Fichier principal d'execution du jeu ne contient pas les librairies.
-
 --[[
 Liste des 5 elements qui constituent vraiment des prioritées absolues :
+  
+  - Programmer un systeme de points de vie du joueur, et des ennemis.
+  - Programmer l'affichage des menus : principal, pause, quitter, parametres, fin, jeu, gagné, perdu.
+  - Programmer visuel des degats, vie du hero, des zombies.
+  - Programmer parametres du son, des commandes, et affichage.
+  - Programmer demo d'aide au jeu.
 
-- Programmer un systeme de points de vie du joueur, et des ennemis.
-- Programmer Tous les ecrans : principal, pause, quitter, parametres, fin, jeu, gagné, perdu.
-- Programmer visuel des degats, vie du hero, des zombies.
-- Programmer parametres du son, des commandes, et affichage.
-- Programmer demo d'aide au jeu.
+Taches terminées
+  - ecran d'intro,
+  
+  
+  
 ]]
 
 --import required modules for the game.
 require       'assets.code.data'
 require       'assets.code.menu'
 require       'assets.code.quit'
+require       'assets.code.play'
+require       'assets.code.debug'
 
--- display screensize
-love.window.setMode( 360, 200, {fullscreen = false, vsync = true, resizable = true } )
+-- appeler la fonction debug
+ft_debug()
+
+-- display screen
+love.window.setMode( 1280, 720, {fullscreen = false, vsync = true, resizable = true } )
 
 -- fonction d'attente socket.sleep
 socket = require'socket'
 
--- Everything that need to be refresh and is constant
-function love.update()
-  
-  screensize = {
-    -- GET screensize SIZE
-    wallpaper         = love.graphics.newImage('assets/world/images/bg/bg_day.jpg'),
-    X                 = love.graphics.getWidth(),
-    Y                 = love.graphics.getHeight(),
-    ratio_X           = love.graphics.getWidth()/world.bg:getWidth(),
-    ratio_Y           = love.graphics.getHeight()/world.bg:getHeight(),
-}
-
-  mouse = {
-    sprite            = love.graphics.newImage('assets/world/images/cursor.png'),
-    X                 = love.mouse.getX(),
-    Y                 = love.mouse.getY()
-}
-  
-end
-
-  function love.keypressed(key)
+function love.keypressed(key)
         
     if key == 'escape' then
       love.event.quit('quit')
     end
     
     if key == "space" then
-      ft_menu()
+      ft_start()
     end
-    
   end
   
   --Start screen function
 function ft_start()
     
     world.bg = love.graphics.newImage('assets/world/images/bg/bg_start.png')
-    
+    world.screen = "start"
+    print(world.screen)
+
     function love.draw()
-      
-    love.graphics.print("Press Space", screensize.X/2.2, screensize.Y/1.1,r,screensize.ratio_X/2, screensize.ratio_Y/2)
-    love.graphics.print("Vous allez jouer a Clash of Zombies", screensize.X/3, screensize.Y/20,r,screensize.ratio_X/2, screensize.ratio_Y/2)
+    
+    love.graphics.print("Press Space",                            scr.X/2.2, scr.Y/1.1,r,scr.ratio_X/2, scr.ratio_Y/2)
+    love.graphics.print("Vous allez jouer a Clash of Zombies",    scr.X/3, scr.Y/20,r,scr.ratio_X/2, scr.ratio_Y/2)
   
     -- Dessiner la souris
   love.graphics.draw(mouse.sprite, love.mouse.getX(), love.mouse.getY())
   love.mouse.setVisible(false)
   
+  end
+  
+    function love.keypressed(key)
+        
+    if key == 'escape' then
+      ft_quit()
+    end
+    
+    if key == "space" then
+      love.audio.pause(world.bgm)
+      ft_menu()
+    end
+    
   end
   
 end
@@ -76,17 +80,18 @@ function ft_jicle()
   world.bg = love.graphics.newImage('assets/world/images/bg/bg_jicle.jpg')
   love.audio.play(world.bgm)
   world.screen = "jicle"
+  print(world.screen)
   
   function love.draw()
   
-    love.graphics.draw(world.bg, 0,0,r,screensize.ratio_X,screensize.ratio_Y)
+    love.graphics.draw(world.bg,                0,0,r,scr.ratio_X,scr.ratio_Y)
   
   end
   
 end
 
 -- Initialiser le deroulement du jeu par la fonction ft_jicle l"ecran de demarrage en quelque sorte.
-ft_jicle()
+--ft_jicle()
 --
 io.stdout:setvbuf("no")
 	

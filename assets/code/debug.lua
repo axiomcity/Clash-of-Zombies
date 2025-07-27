@@ -1,5 +1,38 @@
--- display screensize
-love.window.setMode( 1280, 720, {fullscreen = false, vsync = true, resizable = true } )
+-- Bienvenue dans la fonction de debug
+
+function ft_debug()
+  
+  -- display screensize
+  love.window.setMode( 1280, 720, {fullscreen = false, vsync = true, resizable = true } )
+  
+  love.audio.pause()
+  
+  print("debug")
+  test = love.audio.newSource('assets/sounds/bgm_play.ogg', "stream")
+  i = 1
+  love.audio.play(test)
+
+  function love.keypressed(key)
+
+
+    if key == "up" then
+      
+      i = i + .1
+      test:setVolume(i)
+      print(test:getVolume(i))
+      print("aaaa")
+
+    end
+
+    if key == "down" then
+      
+      i = i - .1
+      test:setVolume(i)
+      print(test:getVolume(i))
+
+    end
+  end
+end
 
 
 -- exercice 1 : faire un structure.
@@ -50,20 +83,3 @@ mytable = setmetatable( {key1="value1"}, {__index=function( mytable, key, otherk
 print(mytable.mem)
 io.write("Hello world, from ",_VERSION,"!\n")
 --]]
-
-local bg = love.graphics.newImage('bg_night.jpg')
-
-function love.draw()
-  love.graphics.draw(bg)
-
-function love.keypressed(key)
-  if key == 'space' then
-      bg = love.graphics.newVideo('video_lua.ogv')
-      bg:play()
-  end
-end
-end
-
-
-
-io.stdout:setvbuf("no")
