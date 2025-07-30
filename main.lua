@@ -8,12 +8,21 @@ Liste des 5 elements qui constituent vraiment des prioritées absolues :
   - Programmer parametres du son, des commandes, et affichage.
   - Programmer demo d'aide au jeu.
 
-Taches terminées
-  - ecran d'intro,
+Details des taches
+programmer l'ecran de menu : 
+  - pas de bouton tout au clavier, 
+  - presenter les entités du jeu depuis le menu -> hero, ennemies, power ups, el de decor
   
+programmer l'ecran de jeu :
+  - jauges et infos du hero -> vie, armure, force de click, progression, pourcentage boss.
+
+
+Taches terminées
+  - ecran d'intro, menu
   
   
 ]]
+
 
 --import required modules for the game.
 require       'assets.code.data'
@@ -48,11 +57,12 @@ function ft_start()
     world.bg = love.graphics.newImage('assets/world/images/bg/bg_start.png')
     world.screen = "start"
     print(world.screen)
+    love.graphics.setFont(fonts.game.title)
 
     function love.draw()
     
-    love.graphics.print("Press Space",                            scr.X/2.2, scr.Y/1.1,r,scr.ratio_X/2, scr.ratio_Y/2)
-    love.graphics.print("Vous allez jouer a Clash of Zombies",    scr.X/3, scr.Y/20,r,scr.ratio_X/2, scr.ratio_Y/2)
+    love.graphics.print("Press Space",scr.X/2.5, scr.Y/1.1,r,scr.ratio_X/2, scr.ratio_Y/2)
+    love.graphics.print("Clash of Zombies",scr.X/3, scr.Y/20,r,scr.ratio_X/2, scr.ratio_Y/2)
   
     -- Dessiner la souris
   love.graphics.draw(mouse.sprite, love.mouse.getX(), love.mouse.getY())
@@ -76,7 +86,7 @@ function ft_start()
 end
 
 function ft_jicle()
-  
+    
   world.bg = love.graphics.newImage('assets/world/images/bg/bg_jicle.jpg')
   love.audio.play(world.bgm)
   world.screen = "jicle"
@@ -84,14 +94,14 @@ function ft_jicle()
   
   function love.draw()
   
-    love.graphics.draw(world.bg,                0,0,r,scr.ratio_X,scr.ratio_Y)
+    love.graphics.draw(world.bg,0,0,r,scr.ratio_X,scr.ratio_Y)
   
   end
   
 end
 
 -- Initialiser le deroulement du jeu par la fonction ft_jicle l"ecran de demarrage en quelque sorte.
---ft_jicle()
+ft_jicle()
 --
 io.stdout:setvbuf("no")
 	

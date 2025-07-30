@@ -6,7 +6,7 @@ function ft_play()
   
   function love.draw()
       
-    love.graphics.draw(world.bg,0, 0,r, screensize.ratio_X, screensize.ratio_Y)
+    love.graphics.draw(world.bg,0, 0,r, scr.ratio_X, scr.ratio_Y)
   
   end
 
