@@ -32,7 +32,7 @@ require       'assets.code.play'
 require       'assets.code.debug'
 
 -- appeler la fonction debug
-ft_debug()
+--ft_debug()
 
 -- display screen
 love.window.setMode( 1280, 720, {fullscreen = false, vsync = true, resizable = true } )
@@ -77,7 +77,7 @@ function ft_start()
     end
     
     if key == "space" then
-      love.audio.pause(world.bgm)
+      love.audio.pause(world.vol.bgm)
       ft_menu()
     end
     
@@ -87,10 +87,10 @@ end
 
 function ft_jicle()
     
-  world.bg = love.graphics.newImage('assets/world/images/bg/bg_jicle.jpg')
-  love.audio.play(world.bgm)
+  world.vol.bgm = love.audio.newSource("assets/sounds/jicle.mp3", "stream")
   world.screen = "jicle"
   print(world.screen)
+  love.audio.play(world.vol.bgm)
   
   function love.draw()
   

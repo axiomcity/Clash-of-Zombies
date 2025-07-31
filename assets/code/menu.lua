@@ -1,11 +1,14 @@
 function ft_menu()
   
   world.screen = "menu"
-  world.bg            = love.graphics.newImage('assets/world/images/bg/bg_menu.jpg')
-  world.bgm           = love.audio.newSource('assets/sounds/bgm_menu.ogg', "stream")
+  world.bg = love.graphics.newImage('assets/world/images/bg/bg_menu.jpg')
+  world.vol.bgm = love.audio.newSource('assets/sounds/bgm_menu.ogg', "stream")
   love.audio.pause()
-  love.audio.play(world.vol.bgm_test)
-  love.audio.play(world.vol.sfx_test)
+    print("demarrage vol bgm = ", world.vol.bgm:getVolume())
+    print("demarrage vol sfx = ", world.vol.sfx:getVolume())
+
+  love.audio.play(world.vol.bgm)
+  love.audio.play(world.vol.sfx)
   print(world.screen)
   love.graphics.setFont(fonts.game.message)
 
@@ -45,7 +48,6 @@ function ft_parametres()
   world.bg = love.graphics.newImage('assets/world/images/bg/bg_parametres.png')
   love.audio.pause()
   love.graphics.setFont(fonts.game.button)
-
   
   function love.draw()
   
@@ -72,8 +74,8 @@ function ft_parametres()
     end
     
     world.vol.set = world.vol.set + 1
-    love.audio.play(world.vol.bgm_test)
-    love.audio.play(world.vol.sfx_test)
+    love.audio.play(world.vol.bgm)
+    love.audio.play(world.vol.sfx)
     print(world.vol.set)
   end
   
@@ -84,34 +86,34 @@ function ft_parametres()
       end
     
     world.vol.set = world.vol.set - 1
-    love.audio.play(world.vol.bgm_test)
-    love.audio.play(world.vol.sfx_test)
+    love.audio.play(world.vol.bgm)
+    love.audio.play(world.vol.sfx)
     print(world.vol.set)
   
   end
-    
+  
   if world.vol.set == 1 then
   
-    world.vol.bgm_test:setVolume(0)
-    world.vol.sfx_test:setVolume(0)
+    world.vol.bgm:setVolume(0)
+    world.vol.sfx:setVolume(0)
     world.vol.name = "Aucun sons" 
     
   elseif world.vol.set == 2 then
   
-    world.vol.bgm_test:setVolume(1)
-    world.vol.sfx_test:setVolume(0)
+    world.vol.bgm:setVolume(1)
+    world.vol.sfx:setVolume(0)
     world.vol.name = "Juste la musique" 
     
   elseif world.vol.set == 3 then
   
-    world.vol.bgm_test:setVolume(0)
-    world.vol.sfx_test:setVolume(1)
+    world.vol.bgm:setVolume(0)
+    world.vol.sfx:setVolume(1)
     world.vol.name = "Juste les effets sonores" 
     
   elseif world.vol.set == 4 then
   
-    world.vol.bgm_test:setVolume(1)
-    world.vol.sfx_test:setVolume(1)
+    world.vol.bgm:setVolume(1)
+    world.vol.sfx:setVolume(1)
     world.vol.name = "Musique plus les effets sonores"
 
   end
@@ -138,10 +140,23 @@ function ft_parametres()
     ft_parametres()
   end
 
-  if key == 'escape' then
-    ft_menu()
-  end
+if key == 'escape' then
   
+  -- Enregistrer les parametres a la sortie des parametres.
+  success, message = love.filesystem.write("settings.txt", "[ USER SETTINGS ]\n\n")
+  success, message = love.filesystem.append("settings.txt", world.vol.bgm:getVolume() .. "\n")
+  success, message = love.filesystem.append("settings.txt", world.vol.bgm:getVolume() .. "\n")
+  
+  local save_directory = love.filesystem.getSaveDirectory()
+  print("Le répertoire de sauvegarde est : " .. save_directory)
+  
+  print("vol sfx = ", world.vol.sfx:getVolume())
+  print("vol bgm = ", world.vol.bgm:getVolume())
+  
+  ft_menu()
 end
   
 end
+  
+end
+--
