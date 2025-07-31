@@ -10,7 +10,7 @@ function ft_debug()
   print("debug")
   test = love.audio.newSource('assets/sounds/bgm_play.ogg', "stream")
   i = 1
-  love.audio.play(test)
+  --love.audio.play(test)
 
 end
 
