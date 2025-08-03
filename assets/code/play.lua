@@ -11,6 +11,7 @@ function ft_play(state)
     love.graphics.draw(world.bg,0, 0,r, scr.ratio_X, scr.ratio_Y)
   
 end
+<<<<<<< HEAD
 
   
 function ft_pause(state)
@@ -39,9 +40,35 @@ function love.keypressed(key)
     ft_parametres()
   end
 
+=======
+
+function love.keypressed(key)
+  
+  if key == 'escape' then
+  
+  ft_pause()
+
+end
+
+
+function ft_pause()
+
+  world.bg = love.graphics.newImage('assets/world/images/bg/bg_day.jpg')
+  world.vol.bgm = .3
+  world.vol.sfx = .3
+
+  function love.draw()
+      
+    love.graphics.draw(world.bg,0, 0,r, scr.ratio_X, scr.ratio_Y)
+  
+end
+>>>>>>> 5e291a5feee59c4f73577fc18cd0a953281543d9
 end
 end
 
 end
+<<<<<<< HEAD
 end
+=======
+>>>>>>> 5e291a5feee59c4f73577fc18cd0a953281543d9
 --
