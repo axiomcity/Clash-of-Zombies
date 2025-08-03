@@ -1,0 +1,18 @@
+----
+
+Programmer C c#, python lua, et libraires.
+Brancher une webcam.
+Brancher une manette d' arcade.
+Se connecter a internet.
+Brancher un écran.
+
+Brancher une batterie
+Brancher un panneau solaire.
+Brancher RAM disque dur, carte graphique.
+Peser moins de 120g.
+Exécuter arch linux.
+
+Backup du système.
+Flasher le BIOS.
+Afficher l'heure,
+Être transportable dans une housse

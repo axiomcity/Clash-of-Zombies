@@ -1,21 +1,21 @@
 function ft_menu()
   
   world.screen = "menu"
-  world.bg = love.graphics.newImage('assets/world/images/bg/bg_menu.jpg')
-  world.vol.bgm = love.audio.newSource('assets/sounds/bgm_menu.ogg', "stream")
+  world.param.bgm = love.audio.newSource('assets/sounds/bgm_menu.ogg', "stream")
   love.audio.pause()
-    print("demarrage vol bgm = ", world.vol.bgm:getVolume())
-    print("demarrage vol sfx = ", world.vol.sfx:getVolume())
-
-  love.audio.play(world.vol.bgm)
-  love.audio.play(world.vol.sfx)
+  
+  love.audio.play(world.param.bgm)
   print(world.screen)
   love.graphics.setFont(fonts.game.message)
+  world.bg.tit = love.graphics.newImage('assets/world/bg/bg_titre.jpg')
 
 function love.draw()
     
-    -- Dessiner le fond et les boutons de jeu.
-    love.graphics.draw(world.bg,0, 0,r, scr.ratio_X, scr.ratio_Y)
+    -- fond ecran
+    love.graphics.draw(world.bg.pla,0,0,r, scr.ratio_X, scr.ratio_Y)
+    
+    -- afficher le score
+    love.graphics.print(world.joueur.score,scr.X/2, scr.Y/20,r, scr.ratio_X, scr.ratio_Y)
     
     -- Dessiner les instructions
     love.graphics.print("Appuiez sur espace pour Jouer \n Appuiez sur P pour aller aux parametres \n Appuiez sur Echap pour Quitter",              scr.X/20, scr.Y/2,r,scr.ratio_X*2, scr.ratio_Y*2)
@@ -43,9 +43,13 @@ function love.keypressed(key)
 end
 end
 
+function ft_score()
+
+end
+
 function ft_parametres()
   
-  world.bg = love.graphics.newImage('assets/world/images/bg/bg_parametres.png')
+  world.bg = love.graphics.newImage('assets/world/bg/bg_parametres.png')
   love.audio.pause()
   love.graphics.setFont(fonts.game.button)
   
@@ -56,8 +60,8 @@ function ft_parametres()
     love.graphics.print("Son : Haut et Bas ",     scr.X/20, scr.Y/5,r,scr.ratio_X*2, scr.ratio_Y*2)
     love.graphics.print("Image Gauche et Droite ",     scr.X/2, scr.Y/5,r,scr.ratio_X*2, scr.ratio_Y*2)
     
-    love.graphics.print(" Choisir les sons joues en jeu\n " .. world.vol.name,                   scr.X/20, scr.Y/2,r,scr.ratio_X*2, scr.ratio_Y*2)
-    love.graphics.print(" Choisir le mode d'affichage de l'ecran\n " .. world.pleinecran,            scr.X/2, scr.Y/2,r,scr.ratio_X*2, scr.ratio_Y*2)
+    love.graphics.print(" Choisir les sons joues en jeu\n " .. world.param.name,                   scr.X/20, scr.Y/2,r,scr.ratio_X*2, scr.ratio_Y*2)
+    love.graphics.print(" Choisir le mode d'affichage de l'ecran\n " .. world.param.ecrname,            scr.X/2, scr.Y/2,r,scr.ratio_X*2, scr.ratio_Y*2)
     
     -- Dessiner la souris
     love.graphics.draw(mouse.sprite, love.mouse.getX(), love.mouse.getY())
@@ -69,52 +73,52 @@ function ft_parametres()
   
   if key == 'up' then
     
-    if world.vol.set >= 4 then
-      world.vol.set = world.vol.set - 1
+    if world.param.son >= 4 then
+      world.param.son = world.param.son - 1
     end
     
-    world.vol.set = world.vol.set + 1
-    love.audio.play(world.vol.bgm)
-    love.audio.play(world.vol.sfx)
-    print(world.vol.set)
+    world.param.son = world.param.son + 1
+    love.audio.play(world.param.bgm)
+    love.audio.play(world.param.sfx)
+    print(world.param.son)
   end
   
   if key == 'down' then
     
-    if world.vol.set <= 1 then
-        world.vol.set = world.vol.set + 1
+    if world.param.son <= 1 then
+        world.param.son = world.param.son + 1
       end
     
-    world.vol.set = world.vol.set - 1
-    love.audio.play(world.vol.bgm)
-    love.audio.play(world.vol.sfx)
-    print(world.vol.set)
+    world.param.son = world.param.son - 1
+    love.audio.play(world.param.bgm)
+    love.audio.play(world.param.sfx)
+    print(world.param.son)
   
   end
   
-  if world.vol.set == 1 then
+  if world.param.son == 1 then
   
-    world.vol.bgm:setVolume(0)
-    world.vol.sfx:setVolume(0)
-    world.vol.name = "Aucun sons" 
+    world.param.bgm:setVolume(0)
+    world.param.sfx:setVolume(0)
+    world.param.name = "Aucun sons" 
     
-  elseif world.vol.set == 2 then
+  elseif world.param.son == 2 then
   
-    world.vol.bgm:setVolume(1)
-    world.vol.sfx:setVolume(0)
-    world.vol.name = "Juste la musique" 
+    world.param.bgm:setVolume(1)
+    world.param.sfx:setVolume(0)
+    world.param.name = "Juste la musique" 
     
-  elseif world.vol.set == 3 then
+  elseif world.param.son == 3 then
   
-    world.vol.bgm:setVolume(0)
-    world.vol.sfx:setVolume(1)
-    world.vol.name = "Juste les effets sonores" 
+    world.param.bgm:setVolume(0)
+    world.param.sfx:setVolume(1)
+    world.param.name = "Juste les effets sonores" 
     
-  elseif world.vol.set == 4 then
+  elseif world.param.son == 4 then
   
-    world.vol.bgm:setVolume(1)
-    world.vol.sfx:setVolume(1)
-    world.vol.name = "Musique plus les effets sonores"
+    world.param.bgm:setVolume(1)
+    world.param.sfx:setVolume(1)
+    world.param.name = "Musique plus les effets sonores"
 
   end
   
@@ -131,10 +135,6 @@ function ft_parametres()
     world.pleinecran = "plein ecran"
   
   end
-
-  if key == 'space' then
-    world.bg = love.graphics.newImage('assets/world/images/bg/bg_day.jpg')
-  end
   
   if key == 'p' then
     ft_parametres()
@@ -142,16 +142,17 @@ function ft_parametres()
 
 if key == 'escape' then
   
+  print("world.bgm", world.bg.tit)
   -- Enregistrer les parametres a la sortie des parametres.
   success, message = love.filesystem.write("settings.txt", "[ USER SETTINGS ]\n\n")
-  success, message = love.filesystem.append("settings.txt", world.vol.bgm:getVolume() .. "\n")
-  success, message = love.filesystem.append("settings.txt", world.vol.bgm:getVolume() .. "\n")
+  success, message = love.filesystem.append("settings.txt", world.param.bgm:getVolume() .. "\n")
+  success, message = love.filesystem.append("settings.txt", world.param.bgm:getVolume() .. "\n")
   
   local save_directory = love.filesystem.getSaveDirectory()
   print("Le répertoire de sauvegarde est : " .. save_directory)
   
-  print("vol sfx = ", world.vol.sfx:getVolume())
-  print("vol bgm = ", world.vol.bgm:getVolume())
+  print("vol sfx = ", world.param.sfx:getVolume())
+  print("vol bgm = ", world.param.bgm:getVolume())
   
   ft_menu()
 end

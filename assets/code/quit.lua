@@ -4,7 +4,7 @@
 function ft_quit()
   
   escape = false
-  world.bg          = love.graphics.newImage('assets/world/images/bg/bg_quitter.png')
+  world.bg          = love.graphics.newImage('assets/world/bg/bg_quitter.png')
   love.audio.pause()
   
 function love.draw()

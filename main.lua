@@ -54,15 +54,14 @@ function love.keypressed(key)
   --Start screen function
 function ft_start()
     
-    world.bg = love.graphics.newImage('assets/world/images/bg/bg_start.png')
     world.screen = "start"
-    print(world.screen)
+    print(world.joueur.screen)
     love.graphics.setFont(fonts.game.title)
 
     function love.draw()
     
-    love.graphics.print("Press Space",scr.X/2.5, scr.Y/1.1,r,scr.ratio_X/2, scr.ratio_Y/2)
-    love.graphics.print("Clash of Zombies",scr.X/3, scr.Y/20,r,scr.ratio_X/2, scr.ratio_Y/2)
+    love.graphics.print("Clash of Zombies",scr.X/2.8, scr.Y/20,r,scr.ratio_X*2, scr.ratio_Y*2)
+    love.graphics.print("Press Space",scr.X/2.5, scr.Y/1.1,r,scr.ratio_X*2, scr.ratio_Y*2)
   
     -- Dessiner la souris
   love.graphics.draw(mouse.sprite, love.mouse.getX(), love.mouse.getY())
@@ -77,7 +76,7 @@ function ft_start()
     end
     
     if key == "space" then
-      love.audio.pause(world.vol.bgm)
+      love.audio.pause(world.param.bgm)
       ft_menu()
     end
     
@@ -87,14 +86,14 @@ end
 
 function ft_jicle()
     
-  world.vol.bgm = love.audio.newSource("assets/sounds/jicle.mp3", "stream")
+  world.param.bgm = love.audio.newSource("assets/sounds/jicle.mp3", "stream")
   world.screen = "jicle"
   print(world.screen)
-  love.audio.play(world.vol.bgm)
+  love.audio.play(world.param.bgm)
   
   function love.draw()
   
-    love.graphics.draw(world.bg,0,0,r,scr.ratio_X,scr.ratio_Y)
+    love.graphics.draw(world.bg.jic,0,0,r,scr.ratio_X,scr.ratio_Y)
   
   end
   
