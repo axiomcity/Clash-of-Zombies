@@ -1,18 +1,5 @@
 -- Fichier data qui contient les libraires du jeu.
 
-truc = {
-  
-  bg = 1,
-  
-  truc = {
-    
-    bg = 3,
-    },
-  
-  }
-
-
-
 joueur      = {}
 ennemie     = {}
 world       = {}
@@ -33,18 +20,11 @@ ennemie         = {
   
   vie               = 10,
   degat             = 1,
-<<<<<<< HEAD
-  sprite            = love.graphics.newImage('assets/world/ennemie.png')
-=======
-  sprite            = love.graphics.newImage('assets/world/images/ennemie.png'),
->>>>>>> 5e291a5feee59c4f73577fc18cd0a953281543d9
+  sprite            = love.graphics.newImage('assets/world/ennemie.png'),
   
 }
 
 world           = {
-  
-<<<<<<< HEAD
-  scr        = love.graphics.newImage('assets/world/bg/bg_play.jpg'),
   
   -- Charger les fonds d'ecrans
   bg = {
@@ -62,7 +42,37 @@ world           = {
     pau        = love.graphics.newImage('assets/world/bg/bg_pause.png'),
     sta        = love.graphics.newImage('assets/world/bg/bg_start.png'),
     
-  },
+},
+
+  mus = {
+    
+    men = love.audio.newSource('assets/sounds/bgm_menu.ogg', "stream"),
+    nig = love.audio.newSource('assets/sounds/bgm_night.ogg', "stream"),
+    pau = love.audio.newSource('assets/sounds/bgm_pause.ogg', "stream"),
+    pla = love.audio.newSource('assets/sounds/bgm_play.ogg', "stream"),
+    jic = love.audio.newSource('assets/sounds/bgm_jicle.ogg', "stream"),
+    oxo = love.audio.newSource('assets/sounds/bgm_oxo.ogg', "stream"),
+    sou = love.audio.newSource('assets/sounds/bgm_soup.ogg', "stream"),
+    sfx = {
+      
+      bde = love.audio.newSource('assets/sounds/effects/sfx_boss_death.mp3', "static"),
+      bsp = love.audio.newSource('assets/sounds/effects/sfx_boss_spawn.mp3', "static"),
+      lup = love.audio.newSource('assets/sounds/effects/sfx_levelup.ogg', "static"),
+      tst = love.audio.newSource('assets/sounds/effects/sfx_test.mp3', "static"),
+      zb01 = love.audio.newSource('assets/sounds/effects/sfx_zb_01.mp3', "static"),
+      zb02 = love.audio.newSource('assets/sounds/effects/sfx_zb_02.mp3', "static"),
+      zb03 = love.audio.newSource('assets/sounds/effects/sfx_zb_03.mp3', "static"),
+      zb04 = love.audio.newSource('assets/sounds/effects/sfx_zb_04.mp3', "static"),
+      zb05 = love.audio.newSource('assets/sounds/effects/sfx_zb_05.mp3', "static"),
+      zb06 = love.audio.newSource('assets/sounds/effects/sfx_zb_06.mp3', "static"),
+      zb07 = love.audio.newSource('assets/sounds/effects/sfx_zb_07.mp3', "static"),
+      zb08 = love.audio.newSource('assets/sounds/effects/sfx_zb_08.mp3', "static"),
+      zb09 = love.audio.newSource('assets/sounds/effects/sfx_zb_09.mp3', "static"),
+      zb10 = love.audio.newSource('assets/sounds/effects/sfx_zb_10.mp3', "static"),
+      
+      },
+    
+    },
   
     -- données joueur
   joueur = {
@@ -71,7 +81,7 @@ world           = {
     score             = 0, -- score de la derniere partie
     screen            = "nil",
     
-  },
+},
   
   -- Charger les actifs du jeu.
   assets = {
@@ -86,32 +96,26 @@ world           = {
     tree_4     = love.graphics.newImage('assets/world/elem/tree_04.png'),
     tree_5     = love.graphics.newImage('assets/world/elem/tree_05.png'),
 
-    },
+},
 
   -- Reglages des paramtres graphiques et audio
-  param           = {
-=======
-  -- le fond d'ecran et la musique
-  bg                = love.graphics.newImage('assets/world/images/bg/bg_jicle.jpg'),
-  cursor            = love.graphics.newImage('assets/world/images/cursor.png'),
-  screen            = "nil",
-  pleinecran        = "plein ecran",
-  redim             = true,
-  vol           = {
->>>>>>> 5e291a5feee59c4f73577fc18cd0a953281543d9
+  param      = {
       
         name        = "musique du jeu",
-        bgm         = love.audio.newSource("assets/sounds/jicle.mp3", "stream"),
+        bgm         = love.audio.newSource("assets/sounds/bgm_oxo.ogg", "stream"),
         sfx         = love.audio.newSource("assets/sounds/effects/sfx_test.mp3", "static"),
-<<<<<<< HEAD
         son         = 1, -- Choix des paramtres sonores, de 1 a 4
         ecr         = true,
         ecrname     = "plein ecran",
-=======
         set         = 1, -- Choix des paramtres sonores, de 1 a 4
->>>>>>> 5e291a5feee59c4f73577fc18cd0a953281543d9
         
-      }      
+},
+
+  -- initaliser le sprite de la souris
+  mouse         = love.graphics.newImage('assets/world/cursor.png'),
+  -- Initaliser la taille de l'ecran base sur une image
+  scr           = love.graphics.newImage('assets/world/bg/bg_play.jpg'),
+
 }
 
 content, size = love.filesystem.read("settings.txt")
@@ -124,22 +128,15 @@ if #content >= 12 then
     set_2 = tonumber(string.sub(content,22,22))
     set_3 = tonumber(string.sub(content,20,20))
     
-<<<<<<< HEAD
     world.param.bgm:setVolume(set_1)
     world.param.sfx:setVolume(set_2)
     world.param.set = set_3
-=======
-    world.vol.bgm:setVolume(set_1)
-    world.vol.sfx:setVolume(set_2)
-    world.vol.set = set_3
->>>>>>> 5e291a5feee59c4f73577fc18cd0a953281543d9
     
 end
 
 -- config par defaut
 success, message = love.filesystem.write("settings.txt", "[ USER SETTINGS ]\n\n1\n1")
 
-<<<<<<< HEAD
 print("donnée enregistrees", world.param.bgm:getVolume(), world.param.sfx:getVolume())
 
 -- Police d'ecriture mour le menu et intro
@@ -157,24 +154,6 @@ fonts.perso.name    = love.graphics.newFont("assets/fonts/RussoOne.ttf", 14)
 fonts.object        = {}
 fonts.object.info   = love.graphics.newFont("assets//fonts/RussoOne.ttf", 10)
 fonts.object.name   = love.graphics.newFont("assets/fonts/RussoOne.ttf", 14)
-=======
-print("donnée enregistrees", world.vol.bgm:getVolume(), world.vol.sfx:getVolume())
-
--- Police d'ecriture mour le menu et intro
---interface du jeu
-fonts.game = {}
-fonts.game.title = love.graphics.newFont("assets/fonts/LoveCraft2.ttf", 20)
-fonts.game.message = love.graphics.newFont("assets/fonts/VT323.ttf", 14)
-fonts.game.button = love.graphics.newFont("assets/fonts/RussoOne.ttf", 14)
-
-fonts.perso = {}
-fonts.perso.damage = love.graphics.newFont("assets/fonts/RussoOne.ttf", 12)
-fonts.perso.name = love.graphics.newFont("assets/fonts/RussoOne.ttf", 14)
-
-fonts.object = {}
-fonts.object.info = love.graphics.newFont("assets//fonts/RussoOne.ttf", 10)
-fonts.object.name = love.graphics.newFont("assets/fonts/RussoOne.ttf", 14)
->>>>>>> 5e291a5feee59c4f73577fc18cd0a953281543d9
 
 -- Everything that need to be refresh and is constant
 function love.update()
@@ -187,7 +166,6 @@ function love.update()
 }
 
   mouse = {
-    sprite            = love.graphics.newImage('assets/world/cursor.png'),
     X                 = love.mouse.getX(),
     Y                 = love.mouse.getY()
 }

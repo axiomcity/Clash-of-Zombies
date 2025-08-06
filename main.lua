@@ -27,9 +27,8 @@ Taches terminées
 --import required modules for the game.
 require       'assets.code.data'
 require       'assets.code.menu'
-require       'assets.code.quit'
 require       'assets.code.play'
-require       'assets.code.debug'
+require       'assets.code.param'
 
 -- appeler la fonction debug
 --ft_debug()
@@ -64,7 +63,7 @@ function ft_start()
     love.graphics.print("Press Space",scr.X/2.5, scr.Y/1.1,r,scr.ratio_X*2, scr.ratio_Y*2)
   
     -- Dessiner la souris
-  love.graphics.draw(mouse.sprite, love.mouse.getX(), love.mouse.getY())
+  love.graphics.draw(world.mouse, love.mouse.getX(), love.mouse.getY())
   love.mouse.setVisible(false)
   
   end
@@ -76,11 +75,7 @@ function ft_start()
     end
     
     if key == "space" then
-<<<<<<< HEAD
       love.audio.pause(world.param.bgm)
-=======
-      love.audio.pause(world.vol.bgm)
->>>>>>> 5e291a5feee59c4f73577fc18cd0a953281543d9
       ft_menu()
     end
     
@@ -90,17 +85,10 @@ end
 
 function ft_jicle()
     
-<<<<<<< HEAD
-  world.param.bgm = love.audio.newSource("assets/sounds/jicle.mp3", "stream")
   world.screen = "jicle"
   print(world.screen)
-  love.audio.play(world.param.bgm)
-=======
-  world.vol.bgm = love.audio.newSource("assets/sounds/jicle.mp3", "stream")
-  world.screen = "jicle"
-  print(world.screen)
-  love.audio.play(world.vol.bgm)
->>>>>>> 5e291a5feee59c4f73577fc18cd0a953281543d9
+  love.audio.play(world.mus.jic)
+
   
   function love.draw()
   
