@@ -5,34 +5,43 @@ ennemie     = {}
 world       = {}
 scr         = {}
 
-joueur          = {
-    
-    vie             = 100,
-    attaques        = 2,
-    blessures       = 0,
-    score           = 0,
-    score_local     = 0,
-    sobriquet       = "",
-
-}
-
-ennemie         = {
-  
-  vie               = 10,
-  degat             = 1,
-  sprite            = love.graphics.newImage('assets/world/ennemie.png'),
-  
-}
-
 world           = {
+  
+  player          = {
+    
+    vie             = 100, -- vie du hero
+    armure          = 0, -- armmure du hero
+    attaques        = 2, -- degat du click
+    score           = 0, -- Recupere le score en ligne par requete web
+    score_local     = 0, -- recupere le score enregistré en local exportable.
+    sobriquet       = "", -- nom que le joueur choisit a l'ecran titre
+    survole         = 0, --animation du hero ay survole de la souris
+    score           = 0, -- score de la derniere partie
+    screen          = "nil", -- ?
+    blessures       = 0, -- ?
+
+},
+
+zb         = {
+  
+  vie               = 10, -- vie du zombie
+  degat             = 1, -- degat du zombie lorsqu'il a attein le hero
+  sprite = {
+    carrerouge           = love.graphics.newImage('assets/world/ennemie.png'), -- apparence physique du zombie spawné
+    carrevert            = love.graphics.newImage('assets/world/joueur.png'), -- apparence physique du zombie spawné
+    male            = love.graphics.newImage('assets/world/sprites/character-sheet.png'), -- apparence physique du zombie spawné
+
+  },
+  
+},
   
   -- Charger les fonds d'ecrans
   bg = {
 
     loaded     = 1, -- 1 menu, 2 jeu, 3 parametres, 4 pause, 5 mort, leaderboard.
+    pla        = love.graphics.newImage('assets/world/bg/bg_play.jpg'),
     cha        = love.graphics.newImage('assets/world/bg/bg_challenge.jpg'),
     bon        = love.graphics.newImage('assets/world/bg/bg_bonus.jpg'),
-    pla        = love.graphics.newImage('assets/world/bg/bg_play.jpg'),
     tit        = love.graphics.newImage('assets/world/bg/bg_titre.jpg'),
     pln        = love.graphics.newImage('assets/world/bg/bg_play_night.jpg'),
     par        = love.graphics.newImage('assets/world/bg/bg_parametres.png'),
@@ -74,14 +83,6 @@ world           = {
     
     },
   
-    -- données joueur
-  joueur = {
-    
-    survole           = 0,
-    score             = 0, -- score de la derniere partie
-    screen            = "nil",
-    
-},
   
   -- Charger les actifs du jeu.
   assets = {
@@ -171,6 +172,65 @@ function love.update()
 }
   
 end
+
+--[[
+
+Rédigez une liste de 25 choses que vous aimeriez accomplir dans le developpement du jeu.
+
+Ne négliez rien : votre vie personnelle ainsi que professionnelle.
+
+entourez les 5 elements les plus importants.
+
+Assurez vous que ces 5 elements constituent vraiment des prioritées absolues pour vous.
+
+Elaborez une stratégie pour vous rapprocher de ces cinq objectifs.
+quelles ressources il vous faudra rassembler, etc.
+
+Mettez les 20 autres elements de cotés. une fois que vous aurez atteins les 
+5 objectifs primaires, vous pourrez réevaluer vos objectifs, mais d'ici la les 20 autres ne sont que des distractions.
+
+]]
+
+--[[
+
+Jeu Clash of Zombies
+
+Taches a faire en priorité :
+
+- Programmer pour chaque type de zombie, une fonction vie, degat, vitesse, lieu de spawn, score, probabilité de spawn
+- Programmer un pathfinding ennemi interagissant avec le decor.
+- Programmer des effets visuels de degats, regain de vie du hero, attaque,
+- Programmer un systeme de palier de 1 a 12 avec 1 boss par niveau, avec systeme de score
+- Programmer demo d'introduction en jeu.
+
+---
+
+Taches a faire plus tard :
+
+Programmer 12 paliers de difficulté.
+Programmer un mode multijoueur
+Programmer les animations.
+Programmer un easter egg
+Programmer des transition
+
+Ajouter liens de contact
+Partager les technique de programmation utilisée dans clash of zombies.
+Ajouter les musique.
+Ajouter un menu de parametres
+Programmer bonus du hero
+
+Jeu en anglais, et plus...
+Programmer un tableau des scores
+Deployer le jeu, crazygames.com, itch.io gamejolt.com, new
+Programmer jouable en ligne depuis nimprte quel plateforme, pc mobile, console.
+Programmer score enregistrable en ligne.
+
+Rendre le jeu jouable sur ecran tactile
+Ajouter une description sur les personnages. 
+Partager le code source du jeu au format mind map.
+
+
+]]
 
 --[[
 

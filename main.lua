@@ -54,7 +54,7 @@ function love.keypressed(key)
 function ft_start()
     
     world.screen = "start"
-    print(world.joueur.screen)
+    print(world.screen)
     love.graphics.setFont(fonts.game.title)
 
     function love.draw()

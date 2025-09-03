@@ -12,7 +12,7 @@ function love.draw()
     love.graphics.draw(world.bg.pla,0,0,r, scr.ratio_X, scr.ratio_Y)
     
     -- afficher le score
-    love.graphics.print(world.joueur.score,scr.X/2, scr.Y/20,r, scr.ratio_X, scr.ratio_Y)
+    love.graphics.print(world.player.score,scr.X/2, scr.Y/20,r, scr.ratio_X, scr.ratio_Y)
     
     -- Dessiner les instructions
     love.graphics.print("Appuiez sur espace pour Jouer \n Appuiez sur P pour aller aux parametres \n Appuiez sur Echap pour Quitter",              scr.X/20, scr.Y/2,r,scr.ratio_X*2, scr.ratio_Y*2)
