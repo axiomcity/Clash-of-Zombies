@@ -1,7 +1,5 @@
 -- Fichier data qui contient les libraires du jeu.
 
-joueur      = {}
-ennemie     = {}
 world       = {}
 scr         = {}
 
@@ -24,12 +22,12 @@ world           = {
 
 zb         = {
   
-  vie               = 10, -- vie du zombie
-  degat             = 1, -- degat du zombie lorsqu'il a attein le hero
+  vie                    = 10, -- vie du zombie
+  degat                  = 1, -- degat du zombie lorsqu'il a attein le hero
   sprite = {
-    carrerouge           = love.graphics.newImage('assets/world/ennemie.png'), -- apparence physique du zombie spawné
-    carrevert            = love.graphics.newImage('assets/world/joueur.png'), -- apparence physique du zombie spawné
-    male            = love.graphics.newImage('assets/world/sprites/character-sheet.png'), -- apparence physique du zombie spawné
+  carrerouge           = love.graphics.newImage('assets/world/ennemie.png'), -- apparence physique du zombie spawné
+  carrevert            = love.graphics.newImage('assets/world/joueur.png'), -- apparence physique du zombie spawné
+  male                 = love.graphics.newImage('assets/world/sprites/character-sheet.png'), -- apparence physique du zombie spawné
 
   },
   
@@ -55,8 +53,8 @@ zb         = {
 
   mus = {
     
-    men = love.audio.newSource('assets/sounds/bgm_menu.ogg', "stream"),
-    nig = love.audio.newSource('assets/sounds/bgm_night.ogg', "stream"),
+    men         = love.audio.newSource('assets/sounds/bgm_menu.ogg', "stream"),
+    nig         = love.audio.newSource('assets/sounds/bgm_night.ogg', "stream"),
     pau = love.audio.newSource('assets/sounds/bgm_pause.ogg', "stream"),
     pla = love.audio.newSource('assets/sounds/bgm_play.ogg', "stream"),
     jic = love.audio.newSource('assets/sounds/bgm_jicle.ogg', "stream"),
@@ -156,7 +154,7 @@ fonts.object        = {}
 fonts.object.info   = love.graphics.newFont("assets//fonts/RussoOne.ttf", 10)
 fonts.object.name   = love.graphics.newFont("assets/fonts/RussoOne.ttf", 14)
 
--- Everything that need to be refresh and is constant
+-- Mettre a jour la taille d'ecran, position souris.
 function love.update()
   scr = {
     -- GET screensize SIZE
@@ -165,29 +163,27 @@ function love.update()
     ratio_X           = love.graphics.getWidth()/world.scr:getWidth(),
     ratio_Y           = love.graphics.getHeight()/world.scr:getHeight(),
 }
-
   mouse = {
     X                 = love.mouse.getX(),
     Y                 = love.mouse.getY()
 }
-  
 end
+
 
 --[[
 
-Rédigez une liste de 25 choses que vous aimeriez accomplir dans le developpement du jeu.
+NOM DU PROJET : CLash of zombies
 
-Ne négliez rien : votre vie personnelle ainsi que professionnelle.
+BUT DE CE PROJET : Developper de A a Z, un zombie tower defense.
 
-entourez les 5 elements les plus importants.
+Fonctionnalitées : generation aleatoire de zombies, palier de difficluté, bonus hero, choix de personnage, tableau de score.
 
-Assurez vous que ces 5 elements constituent vraiment des prioritées absolues pour vous.
 
-Elaborez une stratégie pour vous rapprocher de ces cinq objectifs.
-quelles ressources il vous faudra rassembler, etc.
+QUESTIONS : est ce que Clash of zombie est un roguelike ?
+est ce un clicker game ?
 
-Mettez les 20 autres elements de cotés. une fois que vous aurez atteins les 
-5 objectifs primaires, vous pourrez réevaluer vos objectifs, mais d'ici la les 20 autres ne sont que des distractions.
+Faire d'abord les 5 taches en priorité une fois celles ci terminées, 
+trier dans le reste les quelles seront des taches a faire en priorité
 
 ]]
 

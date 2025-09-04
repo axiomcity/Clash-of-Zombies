@@ -1,108 +1,98 @@
--- Fichier param contenant tout les ecrans de parametres pause etc d'experience utilisateur.
-
-function ft_pause(state)
+function ft_param()
   
-  love.audio.stop(world.mus.pla)
+  -- Gestion du clavier -> musique de fond, effets sonores, taille d'ecran
+  --
+  function love.keypressed(key)
+    
+  if key == 'left' then
+    love.window.setMode( 1280, 720, {fullscreen = true, vsync = true, resizable = true } ) 
+    world.pleinecran = "plein ecran"
+  end
+  
+  if key == 'right' then
+    love.window.setMode( 1280, 720, {fullscreen = false, vsync = true, resizable = true } ) 
+    world.pleinecran = "fenetré"
+  end
+  
+  if key == 'escape' then
+  -- Enregistrer les preferences
+  success, message = love.filesystem.write("settings.txt", "[ USER SETTINGS ]\n\n")
+  success, message = love.filesystem.append("settings.txt", world.param.bgm:getVolume() .. "\n")
+  success, message = love.filesystem.append("settings.txt", world.param.bgm:getVolume() .. "\n")
+  local save_directory = love.filesystem.getSaveDirectory()
+  print("Le répertoire de sauvegarde est : " .. save_directory)
+  print("vol sfx = ", world.param.sfx:getVolume())
+  print("vol bgm = ", world.param.bgm:getVolume())
+  ft_pause()
+end
+if imgame == true then ft_play(state)
+end
+    
+  if key == 'down' then
+    
+    -- Empecher d'aller en dessous de 0
+    if world.param.son <= 1 then
+        world.param.son = world.param.son + 1
+      end
+    world.param.son = world.param.son - 1
+    love.audio.play(world.param.bgm)
+    love.audio.play(world.param.sfx)
+    print("Ecouter les sons", world.param.sfx:getVolume(), world.param.bgm:getVolume())
+  end
+  
+  if key == 'up' then
+    
+    -- Empecher d'aller au dessus de 4
+    if world.param.son >= 4 then
+      world.param.son = world.param.son - 1
+    end
+    world.param.son = world.param.son + 1
+    love.audio.play(world.param.bgm)
+    love.audio.play(world.param.sfx)
+    print("Ecouter les sons", world.param.sfx:getVolume(), world.param.bgm:getVolume())
+  end
+    
+  if world.param.son == 1 then
+    
+    -- Ce gros bloc de code applique les parametres 
+    -- sonores des effets et de la musique avec setvolume
+    world.param.bgm:setVolume(0)
+    world.param.sfx:setVolume(0)
+    world.param.name = "Aucun sons" 
+    world.param.set = world.param.set - 1 
+    elseif world.param.set == 1 then
+    world.param.bgm:setVolume(0)
+    world.param.sfx:setVolume(0)
+    world.param.name = "Aucun sons" 
+    elseif world.param.son == 2 then
+    world.param.bgm:setVolume(1)
+    world.param.sfx:setVolume(0)
+    world.param.name = "Juste la musique" 
+    elseif world.param.son == 3 then
+    world.param.bgm:setVolume(0)
+    world.param.sfx:setVolume(1)
+    world.param.name = "Juste les effets sonores" 
+    elseif world.param.son == 4 then
+    world.param.bgm:setVolume(1)
+    world.param.sfx:setVolume(1)
+    world.param.name = "Musique plus les effets sonores"
+  end
+  
+---
+  
+love.audio.pause()
+love.graphics.setFont(fonts.game.button)
 
   function love.draw()
-      
-    love.graphics.draw(world.bg,0, 0,r, scr.ratio_X, scr.ratio_Y)
-    love.graphics.print("Revenir au jeu touche Echap ",scr.X/20,scr.Y/2,r,scr.ratio_X,scr.ratio_Y)
-    love.graphics.print("Aller au menu touche M ",scr.X/20,scr.Y/2.2,r,scr.ratio_X,scr.ratio_Y)
-    love.graphics.print("Aller aux parametres touche P",scr.X/20,scr.Y/2.2,r,scr.ratio_X,scr.ratio_Y)
-  
-end
-
-function love.keypressed(key)
-
-  if key == 'escape' then
-    if state == 1 then
-      ft_pause()
-    end
-    end
-  
-  if key == 'P' then
-    ft_parametres()
+    love.graphics.draw(world.bg.par,0, 0,r, scr.ratio_X, scr.ratio_Y)
+    love.graphics.print("Son : Haut et Bas ",                     scr.X/20, scr.Y/5,r,scr.ratio_X*2, scr.ratio_Y*2)
+    love.graphics.print("Image Gauche et Droite ",                scr.X/2, scr.Y/5,r,scr.ratio_X*2, scr.ratio_Y*2)
+    love.graphics.print(" Choisir les sons joues en jeu\n " .. world.param.name,                        scr.X/20, scr.Y/2,r,scr.ratio_X*2, scr.ratio_Y*2)
+    love.graphics.print(" Choisir le mode d'affichage de l'ecran\n " .. world.param.ecrname,            scr.X/2, scr.Y/2,r,scr.ratio_X*2, scr.ratio_Y*2)
+    love.graphics.draw(world.mouse, love.mouse.getX(), love.mouse.getY())
+    love.mouse.setVisible(false)  
   end
-
+end
 end
 
-end
-
-
-------------- fonction pour afficher l'ecran de sortie du jeu.
-function ft_quit()
-  
-  escape = false
-  world.bg          = love.graphics.newImage('assets/world/bg/bg_quitter.png')
-  love.audio.pause()
-  
-function love.draw()
-  
-  -- Dessiner le message qui demande si le joueur veut vraiment quitter ?
-  love.graphics.draw(world.bg,0, 0,r, scr.ratio_X, scr.ratio_Y)
-  love.graphics.print("Voulez vous vraiment quitter ? \n oui entrée, non echap", scr.X/20, scr.Y/1.2,r,scr.ratio_X*2,scr.ratio_Y*2)
-
-    -- Dessiner la souris
-  love.graphics.draw(world.mouse, love.mouse.getX(), love.mouse.getY())
-  love.mouse.setVisible(false)
-  
-end
-
-  function love.keypressed(key)
-      if key == 'return' then
-        love.event.quit('quit')
-      end
-      
-      if key == 'escape' then
-        ft_menu()
-      end
-  end
-  
-end
-
-
------------------ Fonction debug
-function ft_debug()
-  
-  -- display screensize
-  love.window.setMode( 1280, 720, {fullscreen = false, vsync = true, resizable = true } )
-  
-  love.audio.pause()
-  
-  print("debug")
-  test = love.audio.newSource('assets/sounds/bgm_play.ogg', "stream")
-  i = 1
-  --love.audio.play(test)
-
-end
-
-
-
--- Exo 1 : Creer une metatable.
---[[
-mytable = setmetatable( {key1="value1"}, {__index=function( mytable, key, otherkey ) 
-    
-      --Check key
-      if key == "mem" then
-        memory = 64
-        for i=1,4,1 do
-          memory = memory*2
-        end
-        
-        return memory .. "KB"
-      else
-        return nil
-      end
-    end
-    
-  }
-)
-print(mytable.mem)
-io.write("Hello world, from ",_VERSION,"!\n")
---]]
-
-
------------------ prochaine fonction ici
-
-----
+---

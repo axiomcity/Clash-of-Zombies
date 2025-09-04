@@ -1,5 +1,5 @@
 function ft_play(state)
-    
+    --[[
 function love.load()
     anim8 = require 'assets/code/modules/anim8'
     love.graphics.setDefaultFilter("nearest", "nearest")
@@ -61,5 +61,16 @@ function love.draw()
     love.graphics.draw(background, 0, 0)
     player.anim:draw(player.spriteSheet, player.x, player.y, nil, 10)
 end    
+    ]]
+    
+love.audio.play(world.mus.pla)
+    
+local sprites = {"assets/world/joueur.png", "assets/world/ennemie.png"}
+image = love.graphics.newArrayImage(sprites)
+
+function love.draw()
+    love.graphics.drawLayer(image, 1, 1, 1)
+    love.graphics.drawLayer(image, 2, 10, 10)
+end
     
 end

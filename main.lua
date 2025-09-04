@@ -1,105 +1,152 @@
--- Fichier principal d'execution du jeu ne contient pas les librairies.
---[[
-Liste des 5 elements qui constituent vraiment des prioritées absolues :
-  
-  - Programmer un systeme de points de vie du joueur, et des ennemis.
-  - Programmer l'affichage des menus : principal, pause, quitter, parametres, fin, jeu, gagné, perdu.
-  - Programmer visuel des degats, vie du hero, des zombies.
-  - Programmer parametres du son, des commandes, et affichage.
-  - Programmer demo d'aide au jeu.
-
-Details des taches
-programmer l'ecran de menu : 
-  - pas de bouton tout au clavier, 
-  - presenter les entités du jeu depuis le menu -> hero, ennemies, power ups, el de decor
-  
-programmer l'ecran de jeu :
-  - jauges et infos du hero -> vie, armure, force de click, progression, pourcentage boss.
+-- Fichier main.lua d'ou part le programme.
 
 
-Taches terminées
-  - ecran d'intro, menu
-  
-  
-]]
-
-
---import required modules for the game.
+------------------- importer les librairies
 require       'assets.code.data'
 require       'assets.code.menu'
 require       'assets.code.play'
 require       'assets.code.param'
+require       'assets.code.pause'
 
--- appeler la fonction debug
+
+------------------ debut
 --ft_debug()
-
 -- display screen
 love.window.setMode( 1280, 720, {fullscreen = false, vsync = true, resizable = true } )
-
 -- fonction d'attente socket.sleep
 socket = require'socket'
+love.graphics.setFont(fonts.game.title)
 
-function love.keypressed(key)
+
+-------------------------- fonction logo
+function ft_logo()
+  -- Gestion du clavier -> quitter, ecran coz
+  function love.keypressed(key)
         
     if key == 'escape' then
       love.event.quit('quit')
     end
-    
     if key == "space" then
-      ft_start()
+      ft_menu()
     end
   end
+  world.screen = "logo"
+  print(world.screen)
+  love.audio.play(world.mus.jic)
+  function love.draw()
+    love.graphics.draw(world.bg.jic,0,0,r,scr.ratio_X,scr.ratio_Y)
+  end
+end
+ft_logo()
   
-  --Start screen function
-function ft_start()
-    
-    world.screen = "start"
-    print(world.screen)
-    love.graphics.setFont(fonts.game.title)
+  
+-------------------------- fonction menu
+function ft_menu()
 
-    function love.draw()
-    
+-- code de test
+-- blah blah
+
+-- Gestion du clavier -> quitter, lancer une partie, parametres.
+function love.keypressed(key)
+  if key == 'escape' then
+    ft_quit()
+  end
+  if key == 'space' then
+    love.audio.pause(world.param.bgm)
+    ft_play()
+  end
+  if key == 'p' then
+    ft_param()
+  end
+end  
+
+world.screen = "menu"
+print(world.screen)
+love.audio.pause()
+love.audio.play(world.mus.men)
+
+function love.draw()
+
+    love.graphics.draw(world.bg.pla,0,0,r, scr.ratio_X, scr.ratio_Y)
+    love.graphics.print(world.player.score,scr.X/2, scr.Y/20,r, scr.ratio_X, scr.ratio_Y)
+    love.graphics.print("Appuiez sur espace pour Jouer \n Appuiez sur P pour aller aux parametres \n Appuiez sur Echap pour Quitter", scr.X/20, scr.Y/2,r,scr.ratio_X*2, scr.ratio_Y*2)
     love.graphics.print("Clash of Zombies",scr.X/2.8, scr.Y/20,r,scr.ratio_X*2, scr.ratio_Y*2)
     love.graphics.print("Press Space",scr.X/2.5, scr.Y/1.1,r,scr.ratio_X*2, scr.ratio_Y*2)
+    love.graphics.draw(world.mouse, love.mouse.getX(), love.mouse.getY())
+    love.mouse.setVisible(false)
   
+  end
+end
+
+
+-------------------------- fonction quit
+function ft_quit()
+  
+  escape = false
+  world.bg          = love.graphics.newImage('assets/world/bg/bg_quitter.png')
+  love.audio.pause()
+  
+function love.draw()
+  
+  -- Dessiner le message qui demande si le joueur veut vraiment quitter ?
+  love.graphics.draw(world.bg,0, 0,r, scr.ratio_X, scr.ratio_Y)
+  love.graphics.print("Voulez vous vraiment quitter ? \n oui entrée, non echap", scr.X/20, scr.Y/1.2,r,scr.ratio_X*2,scr.ratio_Y*2)
+
     -- Dessiner la souris
   love.graphics.draw(world.mouse, love.mouse.getX(), love.mouse.getY())
   love.mouse.setVisible(false)
   
-  end
-  
-    function love.keypressed(key)
-        
-    if key == 'escape' then
-      ft_quit()
+end
+
+-- Gestion du clavier
+function love.keypressed(key)
+    if key == 'return' then
+      love.event.quit('quit')
     end
     
-    if key == "space" then
-      love.audio.pause(world.param.bgm)
+    if key == 'escape' then
       ft_menu()
     end
-    
-  end
+end
   
 end
 
-function ft_jicle()
-    
-  world.screen = "jicle"
-  print(world.screen)
-  love.audio.play(world.mus.jic)
 
+--------------------------- Fonction debug
+function ft_debug()
   
-  function love.draw()
+  -- display screensize
+  love.window.setMode( 1280, 720, {fullscreen = false, vsync = true, resizable = true } )
   
-    love.graphics.draw(world.bg.jic,0,0,r,scr.ratio_X,scr.ratio_Y)
+  love.audio.pause()
   
-  end
-  
+  print("debug")
+  test = love.audio.newSource('assets/sounds/bgm_play.ogg', "stream")
+  i = 1
+  --love.audio.play(test)
+
 end
 
--- Initialiser le deroulement du jeu par la fonction ft_jicle l"ecran de demarrage en quelque sorte.
-ft_jicle()
---
+
+------------------------- fonction pause
+function ft_pause()
+  
+  -- Gestion du clavier -> reprendre la partie
+function love.keypressed(key)
+  if key == 'escape' then
+      ft_play(user) -- Reprendre la partie en cours.
+    end
+end
+
+love.audio.stop()
+
+function love.draw()
+  love.graphics.draw(world.bg.pau,0, 0,r, scr.ratio_X, scr.ratio_Y)
+  love.graphics.print("Revenir au jeu touche Echap ",scr.X/20,scr.Y/2,r,scr.ratio_X,scr.ratio_Y)
+  love.graphics.print("Aller au menu touche M ",scr.X/20,scr.Y/2.2,r,scr.ratio_X,scr.ratio_Y)
+  love.graphics.print("Aller aux parametres touche P",scr.X/20,scr.Y/2.2,r,scr.ratio_X,scr.ratio_Y)
+end
+end
+
 io.stdout:setvbuf("no")
 	
